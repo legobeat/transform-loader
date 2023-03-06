@@ -40,7 +40,7 @@ const output = (config) => {
 export default function(fixture, config, options) {
   // webpack Config
   config = {
-    devtool: config.devtool || 'sourcemap',
+    devtool: config.devtool || 'source-map',
     context: path.resolve(__dirname, '..', 'fixtures'),
     entry: `./${fixture}`,
     output: output(config),
