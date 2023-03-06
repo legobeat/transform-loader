@@ -16,7 +16,7 @@ const module = (config) => {
             {
               test: config.loader.test || /\.txt$/,
               use: {
-                loader: path.resolve(__dirname, '../../src'),
+                loader: path.resolve(__dirname, '../../src/index.js'),
                 options: config.loader.options || {},
               },
             },

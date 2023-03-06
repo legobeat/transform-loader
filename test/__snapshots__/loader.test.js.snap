@@ -1,7 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Loader Defaults 1`] = `
-"ua = navigator.userAgent
-ua = ua.toLowerCase()
-module.exports = ua;"
+"var ua;
+
+ua = navigator.userAgent;
+
+ua = ua.toLowerCase();
+
+module.exports = ua;
+
+"
 `;

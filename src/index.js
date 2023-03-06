@@ -2,8 +2,6 @@
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra
 */
-import loaderUtils from 'loader-utils';
-
 const reBase64 = '\\s*[@#]\\s*sourceMappingURL=data:[^;\n]+;base64,([^\\s]*)';
 
 // Matches /* ... */ comments
@@ -17,7 +15,7 @@ export default function loader(input) {
     throw new TypeError('Pass a module name as query to the transform-loader.');
   }
 
-  const query = loaderUtils.getOptions(this) || {};
+  const query = this.getOptions() || {};
   const callback = this.async();
   const { resource } = this;
   const [q] = Object.keys(query);
