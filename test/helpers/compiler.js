@@ -37,7 +37,7 @@ const output = (config) => {
   };
 };
 
-export default function(fixture, config, options) {
+export default function compile(fixture, config, options) {
   // webpack Config
   config = {
     devtool: config.devtool || 'source-map',
