@@ -59,35 +59,14 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## QueryString Options
-
-When using the loader via a `require` query string you may specify one of two
-types; a loader name, or a function index.
-
-### <loder-name>
-
-Type: `String`
-
-The name of the `browserify` transform you wish to use.
-
-_Note: You must install the correct transform manually. Webpack nor this loader
-will do that for you._
-
-### <loder-index>
-
-Type: `Number`
-
-The index of a function contained within `options.transforms` which to use to
-transform the target file(s).
-
 ## Options
 
-### `transforms`
+### `transform`
 
-Type: `Array[Function]`
+Type: `Function`
 Default: `undefined`
 
-An array of `functions` that can be used to transform a given file matching the
+An `function` that can be used to transform a given file matching the
 configured loader `test`. For example:
 
 ```js
@@ -104,25 +83,21 @@ module.exports = {
     rules: [
       {
         test: /\.ext$/,
-        // NOTE: we've specified an index of 0, which will use the `transform`
-        //       function in `transforms` below.
-        loader: 'transform-loader?0',
+        loader: 'transform-loader',
         options: {
-          transforms: [
-            function transform() {
-              return through(
-                (buffer) => {
-                  const result = buffer
-                    .split('')
-                    .map((chunk) =>
-                      String.fromCharCode(127 - chunk.charCodeAt(0))
-                    );
-                  return this.queue(result).join('');
-                },
-                () => this.queue(null)
-              );
-            },
-          ],
+          transform: function transform() {
+            return through(
+              (buffer) => {
+                const result = buffer
+                  .split('')
+                  .map((chunk) =>
+                    String.fromCharCode(127 - chunk.charCodeAt(0))
+                  );
+                return this.queue(result).join('');
+              },
+              () => this.queue(null)
+            );
+          },
         },
       },
     ],

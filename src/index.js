@@ -20,8 +20,10 @@ export default function loader(input) {
   const { resource } = this;
   const [q] = Object.keys(query);
 
-  if (/^[0-9]+$/.test(q)) {
-    next(this.options.transforms[+q]);
+  if (query.transforms && /^[0-9]+$/.test(q)) {
+    next(query.transforms[+q]);
+  } else if (query.transform) {
+    next(query.transform);
   } else {
     // eslint-disable-next-line consistent-return
     this.resolve(this.context, q, (err, module) => {
